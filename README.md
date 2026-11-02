@@ -42,3 +42,10 @@ The trade-off: we use the synchronous Node filesystem API. A scan of `lost+found
 - If an entry vanishes between `readdir` and `stat` — concurrent cleanup, another operator removing things — it is skipped rather than aborting the scan.
 - Directories and special files report whatever `stat` returns for `size`, which for directories is filesystem-dependent and usually not the sum of contained file sizes.
 - Passing a path that does not exist throws; the library does not swallow that because it almost always indicates a real misconfiguration.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
