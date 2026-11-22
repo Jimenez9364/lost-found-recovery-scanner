@@ -1,6 +1,6 @@
 {
   "name": "lost-found-recovery-scanner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lists orphaned inodes recovered by fsck in lost+found directories, showing their type and size.",
   "type": "module",
   "main": "src/index.js",
